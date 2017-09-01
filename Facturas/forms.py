@@ -1,4 +1,4 @@
-# coding=utf-8
+﻿# coding=utf-8
 from django import forms
 from django.contrib.auth.forms import User
 from django.db import models
@@ -15,3 +15,8 @@ class UserForm(forms.ModelForm):
             'username' : 'Nombre de Usuario',
             'password' : 'Contraseña'
         }
+
+class FacturaForm(forms.ModelForm):
+    class Meta:
+         model = Factura
+         fields = ['razon_social', 'fecha', 'usuario', 'tipo', 'gasto', 'secuencia', 'total', 'deducible', 'numero']

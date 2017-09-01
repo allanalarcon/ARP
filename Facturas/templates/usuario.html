@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 {% block cuerpo %}
 <div class="navbar-left">
                     <a class="navbar-brand" href="{% url 'Facturas:facturas' %}">
@@ -27,7 +27,8 @@
                                     <p>{{ usuarios.celular }}</p>
                                     <b><p>Email:</p></b>
                                     <p>{{ usuarios.email }}</p>
-                                    </BIG>                                   
+                         <a type="button" href="{% url 'Facturas:change_password' %}" class="col-md-2 btn btn-primary btn block-center">Cambiar contraseña</a>
+                                               </BIG>                                   
                             {% endfor %}
                         </div>
                     </div>

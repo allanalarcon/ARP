@@ -5,15 +5,22 @@ from django.utils import timezone
 
 class Factura(models.Model):
 	id_factura = models.AutoField(primary_key=True)
-	fecha = models.CharField(max_length=20)
+	razon_social = models.CharField(max_length=40)
+	fecha = models.CharField(max_length=10)
 	usuario = models.ForeignKey('Usuario')
 	tipo = models.CharField(max_length=20)
+	gasto = models.CharField(max_length=40)
 	secuencia = models.CharField(max_length=20)
 	total = models.FloatField()
+	deducible = models.FloatField()
 	numero = models.CharField(max_length=40)
+	archivo = models.CharField(max_length=100, default="nada")
 
 	def __str__(self):
 		return self.numero
+
+	class Meta:
+		ordering = ["fecha"]
 
 class Usuario(models.Model):
 	id_usuario = models.AutoField(primary_key=True)

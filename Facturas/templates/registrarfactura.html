@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="navbar-left">
+                    <a class="navbar-brand" href="{% url 'Facturas:facturas' %}">
+                        <span class="glyphicon glyphicon-user"></span> Atras
+                    </a>                                                              
+                </div> 
+<div class="col-lg-12">
+            <div class="panel panel-info">
+            <div class="panel-heading">
+                Nueva Factura
+            </div>
+<div class="text-center" >
+            {% if mjsexitoso %}
+                {{mjsexitoso|capfirst}}
+            {% endif %}
+        </div>
+            <div class="panel-body">
+        <form method="post" class="factura-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Guardar</button>
+        </form>
+</div>
+</div>
+</div>
+{% endblock cuerpo %}
