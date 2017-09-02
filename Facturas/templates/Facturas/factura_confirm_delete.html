@@ -1,41 +1,41 @@
 {% extends "base.html" %}
 {% block cuerpo %}
-
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 		<a class="navbar-brand navbar-left" href="{% url 'Facturas:facturas' %}">
                         <span></span> FactAll
-                    </a>  
-<a class="navbar-brand navbar-left" href="{% url 'Facturas:usuario' %}">
-                        <span class="glyphicon glyphicon-user"></span> Perfil
-                    </a>  
+                    </a>   
 <a class="navbar-brand navbar-right" href="{% url 'seguridad:salir' %}">
                         <span class="glyphicon glyphicon-log-out"></span> Salir
-                    </a>                                                                
+                    </a> 
+<a class="navbar-brand navbar-right" href="{% url 'Facturas:facturas' %}">
+                        <span class="glyphicon glyphicon-user"></span> Atrás
+                    </a>   
+                                                                                 
 	</div>	                                                    
     </nav> 
 
 <div class="col-lg-12">
             <div class="panel panel-info">
             <div class="panel-heading">
-                Cambiar contraseña
+                Eliminar factura
             </div>
-<div class="text-center" >
-            {% if mjsexitoso %}
-                {{mjsexitoso|capfirst}}
-            {% endif %}
-        </div>
 <div class="panel-body">
                 <div class='form-group'>
 <div class="row">
                         <div class="col-md-12">
 
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
-<p></p>   
+<form method="post">{% csrf_token %}
+    <b>¿Está seguro que desea borrar la factura número: "{{ object }}"?</b>
+<p></p>    
 <div class="row">
     </div>
-  <button type="submit" class="col-md-2 btn btn-primary btn block-center">Guardar cambios</button>
-</div>
+    <input type="submit" class="col-md-2 btn btn-danger btn block-center" value="Eliminar" />
+    </div>
 </form>
+</div>
+                    </div>
+               
+            </div>
+        </div>
+
 {% endblock cuerpo %}

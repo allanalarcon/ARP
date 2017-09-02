@@ -24,7 +24,7 @@ SECRET_KEY = 'hg@4lsi^c7w1z8&_q1kdjptj@l6573p)jbvqu!k&1$e3r%u5p*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['asalarco.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['factall.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition

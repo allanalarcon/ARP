@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render,redirect,render_to_response,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
-from django.views.generic import TemplateView,FormView,ListView,UpdateView, DetailView
+from django.views.generic import TemplateView,FormView,ListView,UpdateView, DetailView, DeleteView
 from .forms import *
 from django.contrib.auth import login as auth_login,logout as auth_logout,authenticate
 from django.contrib.auth.models import User
@@ -13,6 +13,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse_lazy
 
 def change_password(request):
     if request.method == 'POST':
@@ -20,10 +21,10 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
-            return render(request, 'change_password.html', {'form': form})
+            messages.success(request, 'Su contraseña fue actualizada correctamente')
+            return render(request, 'change_password.html', {'form': form, 'mjsexitoso': "Contraseña cambiada"})
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, 'Por favor corregir el error cometido.')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
@@ -39,6 +40,11 @@ class Usuario(ListView):
     #fields =['nombre','identificacion','direccion','celular', 'email']
     template_name = 'usuario.html'
     context_object_name = 'usuario'
+
+class Eliminar(DeleteView):
+    model = Factura
+    success_url = reverse_lazy('Facturas:facturas')
+    context_object_name = 'eliminar'
 
 def RegistrarFactura(request):
     form = FacturaForm()

@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from Facturas import views
-from Facturas.views import Facturas, Usuario, RegistrarFactura
+from Facturas.views import Facturas, Usuario, RegistrarFactura, Eliminar
 from django.contrib.auth.decorators import login_required
  
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^registrar/$', login_required(views.RegistrarFactura),name="registrar"),
     url(r'^password/$', login_required(views.change_password), name='change_password'),
     url(r'^editarfactura/(?P<pk>[0-9]+)/$', login_required(views.editar), name='editar'),
+    url(r'^borrar/(?P<pk>\d+)$', login_required(Eliminar.as_view()), name='eliminar'),
 ]
