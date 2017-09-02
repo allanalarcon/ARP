@@ -1,11 +1,19 @@
 ﻿{% extends "base.html" %}
 {% block cuerpo %}
-<div class="navbar-left">
-                    <a class="navbar-brand" href="{% url 'Facturas:usuario' %}">
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+		<a class="navbar-brand navbar-left" href="{% url 'Facturas:facturas' %}">
+                        <span></span> FactAll
+                    </a>  
+<a class="navbar-brand navbar-left" href="{% url 'Facturas:usuario' %}">
                         <span class="glyphicon glyphicon-user"></span> Perfil
-                    </a>                                                              
-                </div> 
-<div class="row">
+                    </a>  
+<a class="navbar-brand navbar-right" href="{% url 'seguridad:salir' %}">
+                        <span class="glyphicon glyphicon-log-out"></span> Salir
+                    </a>   
+                                                                                 
+	</div>	                                                    
+    </nav> 
+
 <div class="col-lg-12">
             <div class="panel panel-info">
             <div class="panel-heading">
@@ -59,13 +67,11 @@
 				    <th class="text-center">RAZÓN SOCIAL</th>
                                     <th class="text-center">FECHA</th>
                                     <th class="text-center">USUARIO</th>
-                                    <th class="text-center">TIPO</th>
-				    <th class="text-center">TIPO GASTO</th>
-                                    <th class="text-center">SECUENCIA</th>
+				    <th class="text-center">TIPO DE GASTO</th>
                                     <th class="text-center">TOTAL</th>
 				    <th class="text-center">DEDUCIBLE</th>
-                                    <th class="text-center">NÚMERO</th>
-				    <th class="text-center">PDF</th>                                 
+				    <th class="text-center">PDF</th>    
+			            <th class="text-center">EDITAR</th>                                
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,14 +80,16 @@
 				    <td>{{ factura.razon_social }}</td>
                                     <td>{{ factura.fecha }}</td>
                                     <td>{{ factura.usuario }}</td>
-                                    <td>{{ factura.tipo }}</td>
-				    <td>{{ factura.gasto }}</td>
-                                    <td>{{ factura.secuencia }}</td>
+				    <td>{{ factura.tipo_de_gasto }}</td>
                                     <td>{{ factura.total }}</td>
-				    <td>{{ factura.deducible }}</td>
-                                    <td>{{ factura.numero }}</td>
-			            <td><a type="button" href="{{ factura.archivo }}" target="_blank" class="col-md-12 btn btn-primary btn block-center">PDF</a></td>                                                                        
-                                </tr>
+                                    <td>{{ factura.deducible }}</td>
+			            {% if "http" in factura.archivo %}
+			            <td><a type="button" href="{{ factura.archivo }}" target="_blank" class="col-md-8 btn btn-primary btn block-center">PDF</a></td>                                                                        
+                                    {% else %}
+                                    <td><a type="button" class="col-md-8 btn btn-primary disabled btn block-center">Vacío</a></td>
+				    {% endif %}
+			            <td><a type="button" href="{% url 'Facturas:editar' pk=factura.id_factura %}" class="col-md-8 btn btn-danger btn block-center">Editar</a></td>
+				    </tr>
                             {% endfor %}
                             </tbody>
                         </table>
@@ -90,7 +98,6 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock cuerpo %}
 {% block js %}
 <script>

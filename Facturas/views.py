@@ -52,3 +52,15 @@ def RegistrarFactura(request):
     else:
         form = FacturaForm()
     return render(request, 'registrarfactura.html', {'form': form})
+
+def editar(request, pk):
+        factura = get_object_or_404(Factura, pk=pk)
+        if request.method == "POST":
+            form = FacturaForm(request.POST, instance=factura)
+            if form.is_valid():
+                factura = form.save(commit=False)
+                factura.save()
+                return render(request, 'registrarfactura.html', {'form': form, 'mjsexitoso': "Factura modificada"})
+        else:
+            form = FacturaForm(instance=factura)
+        return render(request, 'registrarfactura.html', {'form': form})

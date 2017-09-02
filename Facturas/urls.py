@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^usuario/$',login_required(Usuario.as_view()), name="usuario"), 
     url(r'^registrar/$', login_required(views.RegistrarFactura),name="registrar"),
     url(r'^password/$', login_required(views.change_password), name='change_password'),
+    url(r'^editarfactura/(?P<pk>[0-9]+)/$', login_required(views.editar), name='editar'),
 ]
